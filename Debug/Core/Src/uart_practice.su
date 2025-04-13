@@ -1,0 +1,11 @@
+../Core/Src/uart_practice.c:18:6:SendHelloWorldViaUART	40	static
+../Core/Src/uart_practice.c:23:6:SendTextViaUART	16	static
+../Core/Src/uart_practice.c:27:6:TXUARTCommunication	16	static
+../Core/Src/uart_practice.c:34:6:RXUARTCommunication	8	static
+../Core/Src/uart_practice.c:38:6:WaitForRXCommunication	16	static
+../Core/Src/uart_practice.c:49:6:JumpLineViaUART	16	static
+../Core/Src/uart_practice.c:53:6:SendReceivedDataViaUART	16	static
+../Core/Src/uart_practice.c:64:6:HandleLEDViaUART	24	static
+../Core/Src/uart_practice.c:91:6:TurnONInternalLED	8	static
+../Core/Src/uart_practice.c:95:6:TurnOFFInternalLED	8	static
+../Core/Src/uart_practice.c:99:6:ClearBuffer	8	static
