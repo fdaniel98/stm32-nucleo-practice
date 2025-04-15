@@ -13,7 +13,9 @@ uint8_t tx_buffer[30] = "Welcome to Nucleo practice!";
 uint8_t rx_index = 0;
 uint8_t rx_buffer[100];
 uint8_t rx_data[RX_SIZE];
-uint8_t transfer_cplt;
+
+uint8_t sim_buffer[100];
+uint8_t sim_data[100];
 
 void SendHelloWorldViaUART(UART_HandleTypeDef *uart) {
 	char msg[] = "Hello World:\n\r";
@@ -44,6 +46,13 @@ void WaitForRXCommunication(UART_HandleTypeDef *uart) {
 	 * RX_SIZE is the waiting data size Ex. RX_SIZE = 1 will only take 1 data length
 	 */
 	HAL_UART_Receive_IT(uart, rx_data, RX_SIZE);
+}
+
+void WaitForSIMCommunication(UART_HandleTypeDef *sim_uart) {
+	SendTextViaUART("Awaiting for SIM800L data...", sim_uart);
+	JumpLineViaUART(sim_uart);
+
+	HAL_UART_Receive_IT(sim_uart, sim_data, 100);
 }
 
 void JumpLineViaUART(UART_HandleTypeDef *uart) {
@@ -86,6 +95,42 @@ void HandleLEDViaUART(UART_HandleTypeDef *uart) {
 			rx_index += 1;
 		}
 	}
+}
+
+void SIM800UART(UART_HandleTypeDef *main_uart, UART_HandleTypeDef *sim_800_uart) {
+	HAL_UART_Receive_IT(main_uart, rx_data, RX_SIZE);
+	HAL_UART_Receive_IT(sim_800_uart, sim_data, 100);
+
+	if (sizeof(rx_data) > 0) {
+		const char *char_buffer = (const char*) rx_buffer;
+
+		// Hint: On ENTER pressed
+		if (rx_data[0] == 13) {
+			if (strcmp(char_buffer, "AT") == 0) {
+				ClearBuffer();
+
+				JumpLineViaUART(main_uart);
+				SendTextViaUART("You send AT command", main_uart);
+				HAL_UART_Transmit(sim_800_uart, char_buffer,
+						strlen(char_buffer), 10);
+			}
+
+			JumpLineViaUART(main_uart);
+		}
+		// Hint: Other key pressed
+		else {
+			rx_buffer[rx_index] = rx_data[0];
+			SendTextViaUART((const char*) rx_data, main_uart);
+			rx_index += 1;
+		}
+	}
+
+//	if (sizeof(sim_data) > 0) {
+//		SendTextViaUART("Received data from SIM800L:", main_uart);
+//		JumpLineViaUART(main_uart);
+//		SendTextViaUART((const char*) sim_data, main_uart);
+//		JumpLineViaUART(main_uart);
+//	}
 }
 
 void TurnONInternalLED() {

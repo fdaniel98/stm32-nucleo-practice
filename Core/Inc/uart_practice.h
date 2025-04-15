@@ -17,16 +17,17 @@
 
 #include "stm32f4xx_hal.h"
 
-void SendHelloWorldViaUART(UART_HandleTypeDef* uart);
-void SendTextViaUART(const char text[], UART_HandleTypeDef* uart);
-void UARTCommunication(UART_HandleTypeDef* uart);
-void SendReceivedDataViaUART(UART_HandleTypeDef* uart);
-void HandleLEDViaUART(UART_HandleTypeDef* uart);
-void WaitForRXCommunication(UART_HandleTypeDef* uart);
-void JumpLineViaUART(UART_HandleTypeDef* uart);
+void SendHelloWorldViaUART(UART_HandleTypeDef *uart);
+void SendTextViaUART(const char text[], UART_HandleTypeDef *uart);
+void UARTCommunication(UART_HandleTypeDef *uart);
+void SendReceivedDataViaUART(UART_HandleTypeDef *uart);
+void HandleLEDViaUART(UART_HandleTypeDef *uart);
+void WaitForRXCommunication(UART_HandleTypeDef *uart);
+void WaitForSIMCommunication(UART_HandleTypeDef *sim_uart);
+void JumpLineViaUART(UART_HandleTypeDef *uart);
+void SIM800UART(UART_HandleTypeDef *uart, UART_HandleTypeDef *sim_800_uart);
 void TurnONInternalLED();
 void TurnOFFInternalLED();
 void ClearBuffer();
-
 
 #endif /* INC_UART_PRACTICE_H_ */

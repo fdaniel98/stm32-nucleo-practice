@@ -1,5 +1,0 @@
-../Core/Src/sd_practice.c:16:6:InitSD	3
-../Core/Src/sd_practice.c:43:6:AnalyzeSD	4
-../Core/Src/sd_practice.c:111:6:CreateFile	4
-../Core/Src/sd_practice.c:159:5:CheckMount	2
-../Core/Src/sd_practice.c:168:6:SendViaUART	1
